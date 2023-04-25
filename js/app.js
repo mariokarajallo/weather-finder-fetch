@@ -19,6 +19,27 @@ function buscarClima(e) {
 
     return;
   }
+
+  consultarAPI(ciudad, pais);
+}
+
+function consultarAPI(ciudad, pais) {
+  const appId = "5b281bcd48ed0e5111b7bd92e24eefc5";
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
+
+  fetch(url)
+    .then((respuesta) => respuesta.json())
+    .then((datos) => {
+      console.log(datos);
+      if (datos.cod === "404") {
+        mostrarError("Ciudad no encontrada");
+        return;
+      }
+
+      //imprimir la respuesta del fetch en el HTML
+      mostrarClima(datos);
+    });
 }
 
 function mostrarError(mensaje) {
