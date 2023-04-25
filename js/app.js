@@ -42,6 +42,24 @@ function consultarAPI(ciudad, pais) {
     });
 }
 
+function mostrarClima(datos) {
+  const {
+    main: { temp, temp_max, temp_min },
+  } = datos;
+
+  const centigrados = temp - 273.15;
+
+  const tempActual = document.createElement("p");
+  tempActual.innerHTML = `${centigrados} &#8451;`;
+  tempActual.classList.add("font-bold", "text-6xl");
+
+  const resultadoDiv = document.createElement("div");
+  resultadoDiv.classList.add("text-center", "text-white");
+  resultadoDiv.appendChild(tempActual);
+
+  resultado.appendChild(resultadoDiv);
+}
+
 function mostrarError(mensaje) {
   const alerta = document.querySelector(".alerta");
   if (!alerta) {
