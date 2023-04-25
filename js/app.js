@@ -49,7 +49,7 @@ function mostrarClima(datos) {
     main: { temp, temp_max, temp_min },
   } = datos;
 
-  const centigrados = temp - 273.15;
+  const centigrados = kelvinACentigrados(temp);
 
   const tempActual = document.createElement("p");
   tempActual.innerHTML = `${centigrados} &#8451;`;
@@ -60,6 +60,10 @@ function mostrarClima(datos) {
   resultadoDiv.appendChild(tempActual);
 
   resultado.appendChild(resultadoDiv);
+}
+
+function kelvinACentigrados(grados) {
+  return parseInt(grados - 273.15);
 }
 
 function limpiarHTML() {
