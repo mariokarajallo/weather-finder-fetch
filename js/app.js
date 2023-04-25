@@ -62,9 +62,7 @@ function mostrarClima(datos) {
   resultado.appendChild(resultadoDiv);
 }
 
-function kelvinACentigrados(grados) {
-  return parseInt(grados - 273.15);
-}
+const kelvinACentigrados = (grados) => parseInt(grados - 273.15);
 
 function limpiarHTML() {
   while (resultado.firstChild) {
