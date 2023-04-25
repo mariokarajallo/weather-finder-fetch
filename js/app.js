@@ -32,6 +32,8 @@ function consultarAPI(ciudad, pais) {
     .then((respuesta) => respuesta.json())
     .then((datos) => {
       console.log(datos);
+
+      limpiarHTML(); // limpiar HTML
       if (datos.cod === "404") {
         mostrarError("Ciudad no encontrada");
         return;
@@ -58,6 +60,12 @@ function mostrarClima(datos) {
   resultadoDiv.appendChild(tempActual);
 
   resultado.appendChild(resultadoDiv);
+}
+
+function limpiarHTML() {
+  while (resultado.firstChild) {
+    resultado.removeChild(resultado.firstChild);
+  }
 }
 
 function mostrarError(mensaje) {
