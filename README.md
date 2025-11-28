@@ -1,10 +1,10 @@
-# Buscador de Clima
+# Weather Finder
 
-Aplicación web moderna para consultar el clima actual de diferentes ciudades del mundo en tiempo real. Utiliza la API de OpenWeatherMap y presenta los datos con una interfaz elegante y responsiva.
+Weather Finder es una aplicación web moderna y responsiva diseñada para consultar el clima en tiempo real de cualquier ciudad del mundo. Construida con **HTML5**, **JavaScript (ES6+)** y **Tailwind CSS**, la aplicación ofrece una interfaz elegante con efectos de 'glassmorphism' y animaciones fluidas. Utiliza **Vite** como entorno de desarrollo y consume la **OpenWeatherMap API** para obtener datos precisos de temperatura (actual, máxima, mínima) y condiciones climáticas, gestionando errores y validaciones de forma amigable para el usuario.
 
 ## Demo
 
-Para mirar la demo del proyecto visita: [Weather Finder](https://mariokarajallo.github.io/weather-finder-fetch/)
+Para mirar la demo del proyecto visita: [Weather Finder](https://weather-finder-fetch.netlify.app/)
 
 ![Demo del proyecto](weather-finder.gif)
 
@@ -19,6 +19,7 @@ Para mirar la demo del proyecto visita: [Weather Finder](https://mariokarajallo.
 
 ## Tecnologías utilizadas
 
+- **Vite**: Entorno de desarrollo y empaquetador ultrarrápido.
 - **HTML5**: Estructura semántica.
 - **Tailwind CSS**: Estilizado moderno y responsivo (vía CDN).
 - **JavaScript (ES6+)**: Lógica de la aplicación, Fetch API y manipulación del DOM.
@@ -26,19 +27,35 @@ Para mirar la demo del proyecto visita: [Weather Finder](https://mariokarajallo.
 
 ## Instalación y requisitos
 
-Para ejecutar este proyecto localmente, no necesitas instalar dependencias de Node.js, ya que usa Tailwind vía CDN.
+Para ejecutar este proyecto localmente, necesitarás Node.js instalado.
 
 1.  **Clonar el repositorio**:
+
     ```bash
     git clone <URL_DEL_REPOSITORIO>
+    cd weather-finder-fetch
     ```
-2.  **Abrir el proyecto**:
-    Navega a la carpeta del proyecto y abre el archivo `index.html` en tu navegador web favorito.
 
-    > **Nota**: Para una mejor experiencia y evitar problemas de CORS en algunos navegadores, se recomienda usar una extensión como "Live Server" en VS Code.
+2.  **Instalar dependencias**:
 
-3.  **Configuración de API (Opcional)**:
-    El proyecto incluye una API Key de demostración en `js/app.js`. Para producción o uso intensivo, obtén tu propia key en [OpenWeatherMap](https://openweathermap.org/) y actualiza la variable `appId`.
+    ```bash
+    npm install
+    ```
+
+3.  **Configuración de Variables de Entorno**:
+    Crea un archivo `.env` en la raíz del proyecto y agrega tu API Key de OpenWeatherMap:
+
+    ```env
+    VITE_API_KEY=tu_api_key_aqui
+    ```
+
+    > **Nota**: Puedes obtener tu API Key registrándote gratuitamente en [OpenWeatherMap](https://openweathermap.org/).
+
+4.  **Ejecutar el servidor de desarrollo**:
+    ```bash
+    npm run dev
+    ```
+    Abre la URL que aparece en la terminal (generalmente `http://localhost:5173`) en tu navegador.
 
 ## Cómo funciona
 
@@ -47,7 +64,7 @@ Para ejecutar este proyecto localmente, no necesitas instalar dependencias de No
     - Si algún campo está vacío, se muestra una alerta roja indicando "Ambos campos son obligatorios".
     - La alerta desaparece automáticamente después de 3 segundos.
 3.  **Consulta API**:
-    - Se realiza una petición `fetch` a la API de OpenWeatherMap.
+    - Se realiza una petición `fetch` a la API de OpenWeatherMap utilizando la key segura desde `.env`.
     - Se muestra un spinner de carga durante la petición.
 4.  **Resultados**:
     - **Éxito**: Se muestra la ciudad, temperatura actual (en grados grandes), descripción del clima, y las temperaturas máxima y mínima.
@@ -58,19 +75,21 @@ Para ejecutar este proyecto localmente, no necesitas instalar dependencias de No
 ```bash
 .
 ├── css/
-│   └── styles.css          # Estilos personalizados (reemplazados mayormente por Tailwind)
+│   └── styles.css          # Estilos personalizados (complementarios a Tailwind)
 ├── js/
-│   └── app.js              # Lógica principal: selectores, eventos, fetch API, UI
-├── index.html              # Estructura HTML y configuración de Tailwind
+│   └── app.js              # Lógica principal: manejo de DOM y peticiones API
+├── .env                    # Variables de entorno (no incluido en el repo)
+├── index.html              # Punto de entrada de la aplicación
+├── package.json            # Dependencias y scripts del proyecto
 ├── LICENSE                 # Archivo de licencia
 ├── README.md               # Documentación del proyecto
-└── weather-finder.gif      # GIF demostrativo del funcionamiento
+└── weather-finder.gif      # GIF demostrativo
 ```
 
 ### Descripción de archivos principales:
 
 - **index.html**: Contiene el formulario de búsqueda y el contenedor para los resultados. Importa Tailwind CSS y define la configuración del tema.
-- **js/app.js**: Maneja el evento submit del formulario, valida los inputs, realiza la petición a la API, convierte grados Kelvin a Centígrados y actualiza el DOM con los resultados o errores.
+- **js/app.js**: Maneja el evento submit del formulario, valida los inputs, realiza la petición a la API usando `import.meta.env.VITE_API_KEY`, convierte grados Kelvin a Centígrados y actualiza el DOM.
 
 ## Contribuciones
 
