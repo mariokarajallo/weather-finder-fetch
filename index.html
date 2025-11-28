@@ -4,62 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clima - JavaScript Moderno</title>
-
-    <link href="css/styles.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- <link href="css/tailwind.min.css" rel="stylesheet"> -->
-    
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              animation: {
+                'fade-in-up': 'fadeInUp 0.5s ease-out',
+              },
+              keyframes: {
+                fadeInUp: {
+                  '0%': { opacity: '0', transform: 'translateY(10px)' },
+                  '100%': { opacity: '1', transform: 'translateY(0)' },
+                }
+              }
+            }
+          }
+        }
+    </script>
+    <link href="css/styles.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gradient-to-br from-blue-900 via-purple-900 to-slate-900 min-h-screen flex items-center justify-center p-4 font-sans text-white">
 
-    <div class="container mx-auto ">
-        <h1 id="titulo" class="text-4xl mt-5 text-white font-bold uppercase text-center">Busca el Clima</h1>
-        <div class="max-w-lg mx-auto ">
-
-            <div class="p-6 mt-10">
-                <div id="resultado">
-                    <p class="text-center text-white mt-6">Agrega tu ciudad y país, el resultado se mostrará aquí</p>
-                </div>
-            </div>
+    <div class="container max-w-md mx-auto">
+        <!-- Glassmorphism Card -->
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/20 p-8">
             
-            <form id="formulario" class="mt-10 " action="#" method="POST">
-                <div class="mt-5">
+            <header class="text-center mb-8">
+                <h1 id="titulo" class="text-3xl font-bold tracking-wider uppercase drop-shadow-md">Busca el Clima</h1>
+                <p class="text-sm text-white/70 mt-2">Encuentra el clima de tu ciudad al instante</p>
+            </header>
+
+            <form id="formulario" class="space-y-6" action="#" method="POST">
+                <div class="space-y-2">
+                    <label for="ciudad" class="block text-sm font-medium text-white/80 ml-1">Ciudad</label>
                     <input 
                         type="text" 
                         name="ciudad"
                         id="ciudad"
-                        placeholder="Escribe tu Ciudad"
-                        class="w-full p-2 rounded"
+                        placeholder="Ej: Buenos Aires, Madrid..."
+                        class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
                     />
                 </div>
-                <div class="mt-5">
-                    <select 
-                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                        id="pais"
-                    >
-                        <option disabled selected value="">-- Seleccione --</option>
-                        <option value="AR">Argentina</option>
-                        <option value="CO">Colombia</option>
-                        <option value="ES">España</option>
-                        <option value="US">Estados Unidos</option>
-                        <option value="MX">México</option>
-                        <option value="PY">Paraguay</option>
-                    </select>
+
+                <div class="space-y-2">
+                    <label for="pais" class="block text-sm font-medium text-white/80 ml-1">País</label>
+                    <div class="relative">
+                        <select 
+                            id="pais"
+                            class="block w-full appearance-none bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 cursor-pointer" 
+                        >
+                            <option disabled selected value="" class="text-gray-800">-- Seleccione --</option>
+                            <option value="AR" class="text-gray-800">Argentina</option>
+                            <option value="CO" class="text-gray-800">Colombia</option>
+                            <option value="ES" class="text-gray-800">España</option>
+                            <option value="US" class="text-gray-800">Estados Unidos</option>
+                            <option value="MX" class="text-gray-800">México</option>
+                            <option value="PY" class="text-gray-800">Paraguay</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white/70">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
                 </div>
 
                 <input 
                     type="submit"
-                    class="mt-5 w-full bg-yellow-500 p-3  uppercase font-bold cursor-pointer rounded"
+                    class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg transform transition hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                     value="Obtener Clima"
                 />
-
             </form>
 
-     
+            <div id="resultado" class="mt-8 min-h-[100px] flex items-center justify-center">
+                <!-- Results will appear here -->
+            </div>
         </div>
     </div>
 
-    <script src="js/app.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
